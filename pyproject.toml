@@ -1,0 +1,10 @@
+[project]
+name = "wandbp"
+version = "0.1.0"
+description = "Weights & Plots"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pandas>=2.3.3",
+    "wandb>=0.23.0",
+]
