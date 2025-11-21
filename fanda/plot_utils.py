@@ -1,6 +1,54 @@
+import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
+import matplotlib.patches as mpatches
+from matplotlib import rcParams
+from matplotlib import rc
 import seaborn as sns
+
+sns.set_style("white")
+
+rcParams["legend.loc"] = "best"
+rcParams["pdf.fonttype"] = 42
+rcParams["ps.fonttype"] = 42
+
+rc("text", usetex=False)
+
+
+def plot_learning_curves(
+    df: pd.DataFrame,
+    x: str,
+    y: str,
+    figsize=(7, 5),
+    **kwargs,
+):
+
+    fig, ax = plt.subplots(figsize=figsize)
+    ax = sns.lineplot(
+        data=df,
+        x=x,
+        y=y,
+        ax=ax,
+        **kwargs,
+    )
+    return fig, ax
+
+
+def plot_interval_estimates(
+    df: pd.DataFrame,
+    x: str,
+    y: str,
+    figsize=(7, 3),
+    **kwargs,
+):
+    fig, ax = plt.subplots(figsize=figsize)
+    ax = sns.pointplot(
+        data=df,
+        x=x,
+        y=y,
+        ax=ax,
+        **kwargs,
+    )
+    return fig, ax
 
 
 def _decorate_axis(ax, wrect=10, hrect=10, ticklabelsize="large"):
@@ -17,7 +65,7 @@ def _decorate_axis(ax, wrect=10, hrect=10, ticklabelsize="large"):
     return ax
 
 
-def _annotate_and_decorate_axis(
+def annotate_and_decorate_axis(
     ax,
     labelsize="x-large",
     ticklabelsize="x-large",
@@ -47,76 +95,21 @@ def _annotate_and_decorate_axis(
     return ax
 
 
-def plot_sample_efficiency_curve(
-    frames,
-    point_estimates,
-    interval_estimates,
-    algorithms=None,
-    colors=None,
-    color_palette="colorblind",
-    figsize=(7, 5),
-    xlabel=r"Number of Frames (in millions)",
-    ylabel="Aggregate Human Normalized Score",
-    ax=None,
-    labelsize="xx-large",
-    ticklabelsize="xx-large",
-    **kwargs,
-):
-    """Plots an aggregate metric with CIs as a function of environment frames.
-
-    Args:
-      frames: Array or list containing environment frames to mark on the x-axis.
-      point_estimates: Dictionary mapping algorithm to a list or array of point
-        estimates of the metric corresponding to the values in `frames`.
-      interval_estimates: Dictionary mapping algorithms to interval estimates
-        corresponding to the `point_estimates`. Typically, consists of stratified
-        bootstrap CIs.
-      algorithms: List of methods used for plotting. If None, defaults to all the
-        keys in `point_estimates`.
-      colors: Dictionary that maps each algorithm to a color. If None, then this
-        mapping is created based on `color_palette`.
-      color_palette: `seaborn.color_palette` object for mapping each method to a
-        color.
-      figsize: Size of the figure passed to `matplotlib.subplots`. Only used when
-        `ax` is None.
-      xlabel: Label for the x-axis.
-      ylabel: Label for the y-axis.
-      ax: `matplotlib.axes` object.
-      labelsize: Font size of the x-axis label.
-      ticklabelsize: Font size of the ticks.
-      **kwargs: Arbitrary keyword arguments.
-
-    Returns:
-      `axes.Axes` object containing the plot.
-    """
-    if ax is None:
-        _, ax = plt.subplots(figsize=figsize)
-    if algorithms is None:
-        algorithms = list(point_estimates.keys())
-    if colors is None:
-        color_palette = sns.color_palette(color_palette, n_colors=len(algorithms))
-        colors = dict(zip(algorithms, color_palette))
-
-    for algorithm in algorithms:
-        metric_values = point_estimates[algorithm]
-        lower, upper = interval_estimates[algorithm]
-        ax.plot(
-            frames,
-            metric_values,
-            color=colors[algorithm],
-            marker=kwargs.get("marker", "o"),
-            linewidth=kwargs.get("linewidth", 2),
-            label=algorithm,
-        )
-        ax.fill_between(frames, y1=lower, y2=upper, color=colors[algorithm], alpha=0.2)
-    kwargs.pop("marker", "0")
-    kwargs.pop("linewidth", "2")
-
-    return _annotate_and_decorate_axis(
-        ax,
-        xlabel=xlabel,
-        ylabel=ylabel,
-        labelsize=labelsize,
-        ticklabelsize=ticklabelsize,
-        **kwargs,
+def add_legend(ax, labels, colors):
+    fake_patches = [mpatches.Patch(color=colors[label], alpha=0.75) for label in labels]
+    legend = ax.legend(
+        fake_patches,
+        labels,
+        loc="upper center",
+        fancybox=True,
+        ncol=len(labels),
+        fontsize="x-large",
+        bbox_to_anchor=(0.5, 1.1),
     )
+    return legend
+
+
+def save_fig(fig, name):
+    file_name = "{}.pdf".format(name)
+    fig.savefig(file_name, format="pdf", bbox_inches="tight")
+    return file_name
