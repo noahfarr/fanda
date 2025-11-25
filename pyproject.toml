@@ -1,9 +1,12 @@
+[tool.setuptools]
+packages = ["fanda"]
+
 [project]
 name = "fanda"
 version = "0.1.0"
 description = "Figures and Axes"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.11"
 dependencies = [
     "joblib>=1.5.2",
     "pandas>=2.3.3",
