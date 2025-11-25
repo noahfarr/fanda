@@ -10,13 +10,15 @@ Figures and Axes (fanda) is a lightweight Python library designed to streamline 
 
 ## Installation
 You can install fanda directly from the PyPi:
-
-`pip install fanda`
+```bash
+pip install fanda
+```
 
 ## Configuration
 Ensure you are logged into W&B before using the library:
-
-`wandb login`
+```bash
+wandb login
+```
 
 ## Usage
 Here is a simple example of how to pull data from a project and plot the training loss.
@@ -59,4 +61,5 @@ If you find this tool useful for your research, please consider citing it:
   url = {https://github.com/noahfarr/fanda},
 }
 ```
+
 
