@@ -38,9 +38,14 @@ from fanda.visualizations import lineplot, add_legend, save_fig
         x="_step", 
         y="loss", 
         hue="network",
+    )
+    .pipe(
+        annotate_axis, 
         xlabel="Number of Steps",
         ylabel="Loss",
+        labelsize="xx-large",
     )
+    .pipe(decorate_axis, ticklabelsize="xx-large")
     .pipe(add_legend, column="network")
     .pipe(save_fig, name="plot")
 )
@@ -59,6 +64,7 @@ If you find this tool useful for your research, please consider citing it:
   url = {https://github.com/noahfarr/fanda},
 }
 ```
+
 
 
 
