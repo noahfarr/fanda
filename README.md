@@ -45,8 +45,6 @@ from fanda.visualizations import lineplot, add_legend, save_fig
     .pipe(save_fig, name="plot")
 )
 ```
-## Contributing
-Contributions are welcome! Please read the CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -61,5 +59,6 @@ If you find this tool useful for your research, please consider citing it:
   url = {https://github.com/noahfarr/fanda},
 }
 ```
+
 
 
