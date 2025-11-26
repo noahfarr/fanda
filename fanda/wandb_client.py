@@ -6,6 +6,7 @@ from joblib import Memory
 
 memory = Memory("./.fanda.cache", verbose=0)
 
+
 # @memory.cache
 def fetch_wandb(
     entity: str,
@@ -48,4 +49,3 @@ def fetch_wandb(
 
     df = pd.merge(histories, configs, on="run_id", how="left")
     return df
-

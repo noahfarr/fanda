@@ -101,23 +101,24 @@ def pointplot(
     )
     return Fanda(fig=fig, ax=ax)
 
-def add_legend(fanda, labels, fontsize="x-large"):
+
+def add_legend(fanda, labels, fontsize="x-large", loc="upper center", ncol=None):
     colors = sns.color_palette("colorblind", len(labels))
     colors = dict(zip(labels, colors))
     fake_patches = [mpatches.Patch(color=colors[label], alpha=0.75) for label in labels]
     fanda.ax.legend(
         fake_patches,
         labels,
-        loc="upper center",
+        loc=loc,
         fancybox=True,
-        ncol=min(len(labels), 5),
+        ncol=ncol or min(len(labels), 5),
         fontsize=fontsize,
         bbox_to_anchor=(0.5, 1.2),
     )
     return fanda
 
+
 def save_fig(fanda, name):
     file_name = "{}.pdf".format(name)
     fanda.fig.savefig(file_name, format="pdf", bbox_inches="tight")
     return fanda
-
