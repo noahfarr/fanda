@@ -31,8 +31,9 @@ def decorate_axis(fanda, wrect=10, hrect=10, ticklabelsize="large", spines=None)
 
     # Deal with ticks and the blank space at the origin
     fanda.ax.tick_params(length=0.1, width=0.1, labelsize=ticklabelsize)
-    fanda.ax.spines["left"].set_position(("outward", hrect))
-    fanda.ax.spines["bottom"].set_position(("outward", wrect))
+    if "top" not in spines and "right" not in spines:
+        fanda.ax.spines["left"].set_position(("outward", hrect))
+        fanda.ax.spines["bottom"].set_position(("outward", wrect))
     return fanda
 
 
