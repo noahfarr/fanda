@@ -12,7 +12,6 @@ Figures and Axes (fanda) is a lightweight Python library designed to streamline 
 - Publication Ready: Generate clean, professional figures using matplotlib and seaborn defaults tailored for academic papers.
 - Filtering: Easily select runs based on tags, groups, or specific configuration hyperparameters.
 - DataFrame Integration: Convert W&B run histories directly into Pandas DataFrames for custom analysis.
-- 
 
 ## Installation
 You can install fanda directly from PyPi:
@@ -78,6 +77,7 @@ If you find this tool useful for your research, please consider citing it:
   url = {https://github.com/noahfarr/fanda},
 }
 ```
+
 
 
 
