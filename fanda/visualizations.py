@@ -100,6 +100,22 @@ def pointplot(
     return Fanda(fig=fig, ax=ax)
 
 
+def heatmap(
+    df,
+    figsize=(8, 6),
+    **kwargs,
+):
+    fig, ax = plt.subplots(figsize=figsize)
+
+    ax = sns.heatmap(
+        data=df,
+        ax=ax,
+        **kwargs,
+    )
+
+    return Fanda(fig=fig, ax=ax)
+
+
 def add_legend(fanda, labels, fontsize="x-large", loc="upper center", ncol=None):
     colors = sns.color_palette("colorblind", len(labels))
     colors = dict(zip(labels, colors))
