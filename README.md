@@ -62,8 +62,7 @@ fanda = (
 ```
 
 <p align="center">
-  <img src="images/sin_cos.png" width="45%" alt="Example of sin and cosine">
-  <img src="images/noisy_training.png" width="45%" alt="Example of noisy training">
+  <img src="images/sin_cos.png" width="50%" alt="Example of sin and cosine"><img src="images/noisy_training.png" width="50%" alt="Example of noisy training">
 </p>
 
 ## License
@@ -79,6 +78,7 @@ If you find this tool useful for your research, please consider citing it:
   url = {https://github.com/noahfarr/fanda},
 }
 ```
+
 
 
 
