@@ -27,14 +27,17 @@ from fanda.wandb_client import fetch_wandb
 from fanda import transforms
 from fanda.visualizations import lineplot, add_legend, save_fig
 
-(
+df = (
     fetch_wandb("entity", "project", filters={
         "state": "finished",
         "created_at": {"$gte": "2025-01-01"},
     })
-    .pipe(transforms.exponential_moving_average, column="evaluation/mean_episode_returns", alpha=0.7)
-    .pipe( 
-        lineplot, 
+    .pipe(transforms.exponential_moving_average, column="loss", alpha=0.7)
+    .pipe(transforms.remove_outliers, column="loss")
+)
+(
+    lineplot(
+        df=df,
         x="_step", 
         y="loss", 
         hue="network",
@@ -43,11 +46,10 @@ from fanda.visualizations import lineplot, add_legend, save_fig
         annotate_axis, 
         xlabel="Number of Steps",
         ylabel="Loss",
-        labelsize="xx-large",
     )
-    .pipe(decorate_axis, ticklabelsize="xx-large")
-    .pipe(add_legend, column="network")
-    .pipe(save_fig, name="plot")
+    .pipe(decorate_axis)
+    .pipe(add_legend, column="algorithm")
+    .pipe(save_fig, name="algorithm_comparison")
 )
 ```
 
@@ -64,6 +66,7 @@ If you find this tool useful for your research, please consider citing it:
   url = {https://github.com/noahfarr/fanda},
 }
 ```
+
 
 
 
