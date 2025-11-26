@@ -7,7 +7,7 @@ from scipy.stats import trim_mean
 
 from fanda.wandb_client import fetch_wandb
 from fanda import transforms
-from fanda.visualizations import annotate_axis, decorate_axis, pointplot, add_legend, save_fig
+from fanda.visualizations import annotate_axis, decorate_axis, pointplot, save_fig
 
 DIFFICULTIES = ["Easy", "Medium", "Hard"]
 

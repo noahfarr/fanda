@@ -1,5 +1,9 @@
 import matplotlib.pyplot as plt
 
+def show_fig(fanda):
+    plt.show()
+    return fanda
+
 def save_fig(fanda, name):
 
     file_name = "{}.pdf".format(name)
@@ -10,3 +14,4 @@ def save_fig(fanda, name):
 def close_fig(fanda):
     plt.close(fanda.fig)
     return fanda
+
