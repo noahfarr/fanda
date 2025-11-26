@@ -12,35 +12,6 @@ from fanda.utils import save_fig, close_fig
 
 ENV_IDS = ["MemoryChain-bsuite", "UmbrellaChain-bsuite"]
 
-def filter_runs(df: pd.DataFrame) -> pd.DataFrame:
-    latest_timestamps = (
-        (
-            df.groupby(
-                [
-                    "network",
-                    "environment.env_id",
-                    "seed",
-                    "group",
-                ]
-            )["_timestamp"]
-            .max()
-            .reset_index()
-        )
-        .sort_values("_timestamp", ascending=False)
-        .drop_duplicates(
-            subset=[
-                "network",
-                "environment.env_id",
-                "seed",
-            ],
-            keep="first",
-        )
-    )
-
-    df = df[df["group"].isin(latest_timestamps["group"].unique())].copy()
-    return df
-
-
 def get_networks(df):
 
     def func(row):
@@ -179,7 +150,6 @@ def main(env_id):
             "state": "finished",
         })
         .pipe(get_networks)
-        .pipe(filter_runs)
     )
     plot_chain_length(df.copy())
     for length in [2, 4, 8, 16, 32, 64, 128, 256, 512]:
