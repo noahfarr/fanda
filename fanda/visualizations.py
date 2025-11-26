@@ -1,7 +1,5 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-from matplotlib import ticker
 from matplotlib import rcParams
 from matplotlib import rc
 import seaborn as sns

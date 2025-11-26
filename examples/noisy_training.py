@@ -66,7 +66,6 @@ fanda = (
         annotate_axis,
         xlabel="Training Steps",
         ylabel="Normalized Loss (Smoothed)",
-        title="Training Convergence Comparison",
         labelsize="xx-large",
     )
     .pipe(
