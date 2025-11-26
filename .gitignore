@@ -208,3 +208,6 @@ __marimo__/
 
 data/
 plots/
+
+plot_bsuite.py
+plot_popgym.py
