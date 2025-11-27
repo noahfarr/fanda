@@ -1,0 +1,18 @@
+font.family: serif
+font.serif: Times New Roman, Times, DejaVu Serif
+font.size: 10
+axes.titlesize: 10
+axes.labelsize: 10
+xtick.labelsize: 8
+ytick.labelsize: 8
+legend.fontsize: 8
+text.usetex: True
+
+figure.figsize: 5.5, 3.4
+figure.dpi: 300
+
+figure.constrained_layout.use: True
+
+pdf.fonttype: 42
+ps.fonttype: 42
+savefig.format: pdf

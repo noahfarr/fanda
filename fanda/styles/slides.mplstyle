@@ -1,0 +1,14 @@
+font.family: sans-serif
+font.sans-serif: Arial, Helvetica, DejaVu Sans
+font.size: 16
+axes.titlesize: 20
+axes.labelsize: 18
+xtick.labelsize: 16
+ytick.labelsize: 16
+legend.fontsize: 16
+
+figure.figsize: 10, 5.625
+figure.constrained_layout.use: True
+figure.dpi: 200
+
+savefig.format: png
