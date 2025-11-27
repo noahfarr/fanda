@@ -1,3 +1,6 @@
+import pandas as pd
+import numpy as np
+
 def exponential_moving_average(df, column, alpha=1.0, groupby="run_id"):
     df[column] = df.groupby(groupby)[column].transform(
         lambda x: x.ewm(alpha=alpha).mean()
@@ -20,6 +23,19 @@ def remove_outliers(
 
 def truncate(df, column, groupby="run_id"):
     return df[df[column] <= df.groupby(groupby)[column].max().min()]
+
+def pad(df, column, groupby="run_id"):
+    steps = np.arange(0, df[column].max() + 1)
+
+    labels = df[groupby].unique()
+
+    index = pd.MultiIndex.from_product(
+        [labels, steps], 
+        names=[groupby, column]
+    )
+    df = df.set_index([groupby, column]).reindex(index)
+    df = df.groupby(level=0).ffill()
+    return df.reset_index()
 
 
 def normalize(df, column, groupby="run_id"):

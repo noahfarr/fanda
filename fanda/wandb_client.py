@@ -7,7 +7,7 @@ from joblib import Memory
 memory = Memory("./.fanda.cache", verbose=0)
 
 
-# @memory.cache
+@memory.cache
 def fetch_wandb(
     entity: str,
     project: str,
