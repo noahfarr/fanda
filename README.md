@@ -8,9 +8,10 @@
 Figures and Axes (fanda) is a lightweight Python library designed to streamline the process of extracting experiment data from Weights & Biases (wandb) and generating publication-quality plots.The name is a play on "wandb" (Weights and Biases) $\rightarrow$ "fanda" (Figures and Axes).
 
 ## Features
-- Seamless Extraction: Pull scalar histories, configuration configs, and summary metrics from W&B runs easily.
-- Publication Ready: Generate clean, professional figures using matplotlib and seaborn defaults tailored for academic papers.
-- Transformations: Easily transform your data to accelerate your analysis.
+- **Seamless Extraction:** Pull scalar histories, configuration configs, and summary metrics from W&B runs easily.
+- **Publication Ready:** Generate clean, professional figures using matplotlib and seaborn defaults tailored for academic papers.
+- **Conference Styles:** Built-in stylesheets for major conferences (NeurIPS, ICML, ICLR), slides, and posters to automatically handle fonts, sizes, and DPI.
+- **Transformations:** Easily transform your data to accelerate your analysis.
 
 ## Installation
 You can install fanda directly from PyPi:
@@ -27,10 +28,15 @@ wandb login
 ## Usage
 Here is a simple example of how to pull data from a project and plot the training loss.
 ```python
+import matplotlib.pyplot as plt
+
+import fanda
 from fanda.wandb_client import fetch_wandb
 from fanda import transforms
 from fanda.visualizations import lineplot, add_legend, annotate_axis, decorate_axis
 from fanda.utils import save_fig, close_fig
+
+plt.style.use('neurips')
 
 df = (
     fetch_wandb("entity", "project", filters={
@@ -76,6 +82,7 @@ If you find this tool useful for your research, please consider citing it:
   url = {https://github.com/noahfarr/fanda},
 }
 ```
+
 
 
 
