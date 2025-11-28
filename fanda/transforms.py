@@ -38,9 +38,9 @@ def pad(df, column, groupby="run_id"):
     return df.reset_index()
 
 
-def normalize(df, column, groupby="run_id"):
+def normalize(df, column, groupby="run_id", epsilon=1e-8):
     df[column] = df.groupby(groupby)[column].transform(
-        lambda x: (x - x.min()) / (x.max() - x.min())
+        lambda x: (x - x.min()) / (x.max() - x.min() + epsilon)
     )
     return df
 
