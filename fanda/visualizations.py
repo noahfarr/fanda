@@ -116,7 +116,15 @@ def heatmap(
     return Fanda(fig=fig, ax=ax)
 
 
-def add_legend(fanda, labels, fontsize="x-large", loc="upper center", ncol=None):
+def add_legend(
+    fanda,
+    labels,
+    loc="upper center",
+    fancybox=True,
+    ncol=None,
+    fontsize="x-large",
+    bbox_to_anchor=(0.5, 1.2),
+):
     colors = sns.color_palette("colorblind", len(labels))
     colors = dict(zip(labels, colors))
     fake_patches = [mpatches.Patch(color=colors[label], alpha=0.75) for label in labels]
@@ -124,10 +132,10 @@ def add_legend(fanda, labels, fontsize="x-large", loc="upper center", ncol=None)
         fake_patches,
         labels,
         loc=loc,
-        fancybox=True,
+        fancybox=fancybox,
         ncol=ncol or min(len(labels), 5),
         fontsize=fontsize,
-        bbox_to_anchor=(0.5, 1.2),
+        bbox_to_anchor=bbox_to_anchor,
     )
     return fanda
 
