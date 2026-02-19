@@ -63,7 +63,7 @@ def lineplot(
     df,
     x: str,
     y: str,
-    figsize=(7, 5),
+    figsize: tuple = (7, 5),
     **kwargs,
 ):
 

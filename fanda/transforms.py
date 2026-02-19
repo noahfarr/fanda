@@ -40,8 +40,10 @@ def pad(df, column, groupby="run_id"):
 def normalize(df, column, groupby="run_id", scale_by=None, min=None, max=None):
     df = df.copy()
     scale_by = scale_by or column
-    min = min or df.groupby(groupby)[scale_by].transform("min")
-    max = max or df.groupby(groupby)[scale_by].transform("max")
+    if min is None:
+        min = df.groupby(groupby)[scale_by].transform("min")
+    if max is None:
+        max = df.groupby(groupby)[scale_by].transform("max")
 
     df[column] = (df[column] - min) / (max - min)
     return df
