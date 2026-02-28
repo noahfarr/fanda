@@ -5,7 +5,7 @@
 
 # Figures and Axes
 
-Figures and Axes (fanda) is a lightweight Python library designed to streamline the process of extracting experiment data from Weights & Biases (wandb) and generating publication-quality plots.The name is a play on "wandb" (Weights and Biases) $\rightarrow$ "fanda" (Figures and Axes).
+Figures and Axes (fanda) is a lightweight Python library designed to streamline the process of extracting experiment data from Weights & Biases (wandb) and generating publication-quality plots. The name is a play on "wandb" (Weights and Biases) $\rightarrow$ "fanda" (Figures and Axes).
 
 ## Features
 - **Seamless Extraction:** Pull scalar histories, configuration configs, and summary metrics from W&B runs easily.
@@ -82,6 +82,7 @@ If you find this tool useful for your research, please consider citing it:
   url = {https://github.com/noahfarr/fanda},
 }
 ```
+
 
 
 
