@@ -1,8 +1,9 @@
 from typing import Optional
-import wandb
+
 import pandas as pd
-from tqdm.rich import tqdm
+import wandb
 from joblib import Memory
+from tqdm.rich import tqdm
 
 memory = Memory("./.fanda.cache", verbose=0)
 
@@ -16,7 +17,7 @@ def fetch_wandb(
     samples: int = 500,
 ) -> pd.DataFrame:
     api = wandb.Api()
-    runs = api.runs(f"{entity}/{project}", filters=filters)
+    runs = api.runs(f"{entity}/{project}", filters=filters, lazy=False)
 
     histories = pd.DataFrame()
     for run in tqdm(runs):
