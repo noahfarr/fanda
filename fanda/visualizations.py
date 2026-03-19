@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib import rcParams
 from matplotlib import rc
+import numpy as np
 import seaborn as sns
 
 from fanda.fanda import Fanda
@@ -140,7 +141,22 @@ def add_legend(
     return fanda
 
 
-def save_fig(fanda, name):
-    file_name = "{}.pdf".format(name)
-    fanda.fig.savefig(file_name, format="pdf", bbox_inches="tight")
+def subplots(nrows=1, ncols=1, figsize=(7, 5), squeeze=False, **kwargs):
+    fig, axs = plt.subplots(nrows=nrows, ncols=ncols, figsize=figsize, squeeze=squeeze, **kwargs)
+    axs = np.asarray(axs)
+    return Fanda(fig=fig, ax=axs.flat[0], axs=axs)
+
+
+def add_lineplot(fanda, df, x, y, **kwargs):
+    sns.lineplot(data=df, x=x, y=y, ax=fanda.ax, **kwargs)
+    return fanda
+
+
+def add_pointplot(fanda, df, x, y, **kwargs):
+    sns.pointplot(data=df, x=x, y=y, ax=fanda.ax, **kwargs)
+    return fanda
+
+
+def add_heatmap(fanda, df, **kwargs):
+    sns.heatmap(data=df, ax=fanda.ax, **kwargs)
     return fanda
