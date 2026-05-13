@@ -7,14 +7,14 @@ def show_fig(fanda):
     return fanda
 
 
-def save_fig(fanda, name, format="pdf", ensure_dir=True):
+def save_fig(fanda, name, format="pdf", ensure_dir=True, bbox_inches="tight"):
 
     file_name = Path(f"{name}.{format}")
 
     if ensure_dir:
         file_name.parent.mkdir(parents=True, exist_ok=True)
 
-    fanda.fig.savefig(file_name, format=format, bbox_inches="tight")
+    fanda.fig.savefig(file_name, format=format, bbox_inches=bbox_inches)
     return fanda
 
 
