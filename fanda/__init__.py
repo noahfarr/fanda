@@ -1,17 +1,24 @@
 import os
 
+import matplotlib
 import matplotlib.pyplot as plt
 
 import fanda
 
+
 def load_stylesheets():
     stylesheets = {}
     path = os.path.join(fanda.__path__[0], "styles")
-    for folder, _, _ in os.walk(path):
-        new_stylesheets = plt.style.core.read_style_directory(folder)
-        stylesheets.update(new_stylesheets)
+    for folder, _, files in os.walk(path):
+        for file in files:
+            name, extension = os.path.splitext(file)
+            if extension == ".mplstyle":
+                stylesheets[name] = matplotlib.rc_params_from_file(
+                    os.path.join(folder, file), use_default_template=False
+                )
     return stylesheets
 
+
 stylesheets = load_stylesheets()
-plt.style.core.update_nested_dict(plt.style.library, stylesheets)
-plt.style.core.available[:] = sorted(plt.style.library.keys())
+plt.style.library.update(stylesheets)
+plt.style.available[:] = sorted(plt.style.library.keys())
