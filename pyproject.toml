@@ -1,6 +1,9 @@
 [tool.setuptools]
 packages = ["fanda"]
 
+[tool.setuptools.package-data]
+fanda = ["styles/*.mplstyle"]
+
 [project]
 name = "fanda"
 version = "0.2.1"
